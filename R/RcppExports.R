@@ -8,7 +8,7 @@
 #' @param sx P2VM. By default, c(4,4,4,4)
 #' @param fx Total flux in ABCD
 #' 
-gv_abcd2vis <- function(ii, kx = numeric(4), sx = numeric(4), fx = numeric(1)) {
+gv_abcd2vis <- function(ii, kx = as.numeric( c(4)), sx = as.numeric( c(4)), fx = as.numeric( c(1))) {
     .Call('gRavity_gv_abcd2vis', PACKAGE = 'gRavity', ii, kx, sx, fx)
 }
 
@@ -44,7 +44,9 @@ gv_readfits <- function(fits_name, hdu_name = "", col_name = "") {
     .Call('gRavity_gv_readfits', PACKAGE = 'gRavity', fits_name, hdu_name, col_name)
 }
 
-#' @example gv_sci_img2pix(img, cal$idx, cal$cnr, dim(cal$idx))
+#' Strip images to relevant pixels
+#' 
+#' gv_sci_img2pix(img, cal$idx, cal$cnr, dim(cal$idx))
 gv_sci_img2pix <- function(img, idx, cnr, dim, n_wd = 3L) {
     .Call('gRavity_gv_sci_img2pix', PACKAGE = 'gRavity', img, idx, cnr, dim, n_wd)
 }

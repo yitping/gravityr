@@ -3,11 +3,22 @@ Type: Package
 Title: Basic functions to read and reduce GRAVITY FITS files
 Version: 1.0
 Date: 2014-06-29
-Authors@R: c(person("Yitping", "Kok", role=c("aut", "cre"), email="yitping@mpe.mpg.de"))
+Authors@R: c(person("Yitping", "Kok", role=c("aut", "cre"),
+    email="yitping@mpe.mpg.de"))
 Maintainer: Yitping Kok <yitping@mpe.mpg.de>
 Description: More about what it does (maybe more than one line)
 License: GPL-3
-Depends: Rcpp (>= 0.10.6)
+Depends:
+    Rcpp (>= 0.10.6)
 LinkingTo: Rcpp
 SystemRequirements: cfitsio
 NeedsCompilation: yes
+Collate:
+    'gv_blorder.R'
+    'gv_cpmat.R'
+    'gv_rwcsv.R'
+    'gv_sci_checkcal.R'
+    'gv_sci_readcal.R'
+    'gv_sci_readp2vm.R'
+    'gv_telmat.R'
+    'RcppExports.R'

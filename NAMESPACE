@@ -1,2 +1,4 @@
-useDynLib(gRavity)
-exportPattern("^[[:alpha:]]+")
+export(gv_blorder)
+export(gv_readcsv)
+export(gv_telmat)
+export(gv_writecsv)

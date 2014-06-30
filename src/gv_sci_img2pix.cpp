@@ -2,7 +2,9 @@
 #include "gRavity.h"
 using namespace Rcpp;
 
-//' @example gv_sci_img2pix(img, cal$idx, cal$cnr, dim(cal$idx))
+//' Strip images to relevant pixels
+//' 
+//' gv_sci_img2pix(img, cal$idx, cal$cnr, dim(cal$idx))
 // [[Rcpp::export]]
 NumericVector gv_sci_img2pix(NumericMatrix img,
     NumericVector idx, IntegerVector cnr, IntegerVector dim,
