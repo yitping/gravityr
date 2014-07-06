@@ -12,7 +12,7 @@ gv_abcd2vis <- function(ii, kx = as.numeric( c(4)), sx = as.numeric( c(4)), fx =
     .Call('gRavity_gv_abcd2vis', PACKAGE = 'gRavity', ii, kx, sx, fx)
 }
 
-#' Constants of the SCI spectrometer
+#' Constants of the spectrometers
 #' 
 #' Constants which are used in several other functions.
 #' 
