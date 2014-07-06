@@ -55,8 +55,8 @@ gv_sci_img2pix <- function(img, idx, cnr, dim, n_wd = 3L) {
 #' 
 #' Copied from gvspc codes.
 #' 
-gv_sci_pix2vis <- function(flux, dark, p2vm) {
-    .Call('gRavity_gv_sci_pix2vis', PACKAGE = 'gRavity', flux, dark, p2vm)
+gv_sci_pix2vis_unsorted <- function(flux, dark, p2vm) {
+    .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', flux, dark, p2vm)
 }
 
 rcpp_hello_world <- function() {

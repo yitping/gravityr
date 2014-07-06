@@ -7,7 +7,7 @@ using namespace Rcpp;
 //' Copied from gvspc codes.
 //' 
 // [[Rcpp::export]]
-ComplexMatrix gv_sci_pix2vis(NumericMatrix flux, NumericMatrix dark, List p2vm)
+ComplexMatrix gv_sci_pix2vis_unsorted(NumericMatrix flux, NumericMatrix dark, List p2vm)
 {
   int ps_i[] = SCI_IDX_PHASE_SHIFTS;
   int n_ps[] = SCI_NUM_PHASE_SHIFTS;

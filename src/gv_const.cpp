@@ -2,7 +2,7 @@
 #include "gRavity.h"
 using namespace Rcpp;
 
-//' Constants of the SCI spectrometer
+//' Constants of the spectrometers
 //' 
 //' Constants which are used in several other functions.
 //' 

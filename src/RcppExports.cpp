@@ -88,9 +88,9 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
-// gv_sci_pix2vis
-ComplexMatrix gv_sci_pix2vis(NumericMatrix flux, NumericMatrix dark, List p2vm);
-RcppExport SEXP gRavity_gv_sci_pix2vis(SEXP fluxSEXP, SEXP darkSEXP, SEXP p2vmSEXP) {
+// gv_sci_pix2vis_unsorted
+ComplexMatrix gv_sci_pix2vis_unsorted(NumericMatrix flux, NumericMatrix dark, List p2vm);
+RcppExport SEXP gRavity_gv_sci_pix2vis_unsorted(SEXP fluxSEXP, SEXP darkSEXP, SEXP p2vmSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -98,7 +98,7 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< NumericMatrix >::type flux(fluxSEXP );
         Rcpp::traits::input_parameter< NumericMatrix >::type dark(darkSEXP );
         Rcpp::traits::input_parameter< List >::type p2vm(p2vmSEXP );
-        ComplexMatrix __result = gv_sci_pix2vis(flux, dark, p2vm);
+        ComplexMatrix __result = gv_sci_pix2vis_unsorted(flux, dark, p2vm);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
