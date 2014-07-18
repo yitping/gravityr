@@ -1,4 +1,5 @@
-#'
+#' Parse FT P2VM text file
+#' 
 #'
 gv_ft_readp2vm <- function (file_p2vm, n_io=24)
 {

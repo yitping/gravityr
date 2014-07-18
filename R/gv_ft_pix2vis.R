@@ -1,4 +1,6 @@
-#'
+#' Computes the complex visibilty of fringes
+#' 
+#' Computes the complex visibilty of the SCI fringes in a pixel array
 #'
 gv_ft_pix2vis <- function (flux, dark, p2vm, blseq=NULL)
 {

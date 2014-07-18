@@ -1,4 +1,6 @@
-#'
+#' Computes the complex visibility of the fringes
+#' 
+#' Computes the complex visibilty of the FT fringes in a given FITS file
 #'
 gv_ft_fits2vis <- function (fits, p2vm,
 														dark=0, p=1, hdu='imaging_data_ft',

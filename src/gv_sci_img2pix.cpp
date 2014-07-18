@@ -10,11 +10,13 @@ NumericVector gv_sci_img2pix(NumericMatrix img,
     NumericVector idx, IntegerVector cnr, IntegerVector dim,
 		IntegerVector n_wd = 3)
 {
+  // TODO: get dimensions from idx directly to save 1 argument
 	int nch = dim[0];
 	int nio = dim[1];
 	int npl = dim[2];
 	int nwd = as<int>(n_wd);
 	
+  // TODO: return only the 
 	NumericVector pix;
 
 	if (idx.length() != nch*nio*npl) stop("size of idx matrix mismatch\n");

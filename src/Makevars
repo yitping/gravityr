@@ -1,8 +1,8 @@
 ## Use the R_HOME indirection to support installations of multiple R version
-#PKG_CXXFLAGS = -I/Users/yitping/Toolbox/c/include -DGV_DEBUG
-PKG_CXXFLAGS += -I/Users/yitping/Toolbox/c/include
+#PKG_CPPFLAGS = -I/Users/yitping/Toolbox/c/include -DGV_DEBUG
+PKG_CPPFLAGS += -I/Users/yitping/Toolbox/c/include
 PKG_LIBS = `$(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()"` \
-	-L/Users/yitping/Toolbox/c/lib -lcfitsio -lCCfits
+	-L/Users/yitping/Toolbox/c/lib -lcfitsio
 
 ## As an alternative, one can also add this code in a file 'configure'
 ##

@@ -59,6 +59,10 @@ gv_sci_pix2vis_unsorted <- function(flux, dark, p2vm) {
     .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', flux, dark, p2vm)
 }
 
+gv_solvels <- function(rA, rb, rvar_b) {
+    .Call('gRavity_gv_solvels', PACKAGE = 'gRavity', rA, rb, rvar_b)
+}
+
 rcpp_hello_world <- function() {
     .Call('gRavity_rcpp_hello_world', PACKAGE = 'gRavity')
 }

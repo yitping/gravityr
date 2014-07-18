@@ -14,5 +14,5 @@ LaTeX: pdfLaTeX
 
 BuildType: Package
 PackageUseDevtools: Yes
-PackageInstallArgs: --no-multiarch --with-keep.source
+PackageInstallArgs: --no-multiarch --with-keep.source --configure-args='--with-cfitsio-include=$HOME/Toolbox/c/include --with-cfitsio-lib=$HOME/Toolbox/c/lib'
 PackageRoxygenize: rd
