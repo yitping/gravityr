@@ -146,7 +146,7 @@ NumericVector gv_readfits(CharacterVector fits_name,
     case BINARY_TBL:
       if (colname.length() == 0)
       {
-        Rcpp::stop("column name must be specified!\n");
+        REprintf("column name must be specified!\n");
         return wrap(0);
       }
       fits_get_num_rows(pfits, &nrows, &err);

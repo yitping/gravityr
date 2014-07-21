@@ -2,76 +2,115 @@
 #include "gRavity.h"
 using namespace Rcpp;
 
-//' Compute PD
-//' 
-//' Copied from gvspc codes.
-//' 
-// [[Rcpp::export]]
-ComplexMatrix gv_sci_pix2vis_unsorted(NumericMatrix flux, NumericMatrix dark, List p2vm)
+// copied from cppgvspc
+double get_var_v2(double x, double y, double ex, double ey)
 {
-  int ps_i[] = SCI_IDX_PHASE_SHIFTS;
-  int n_ps[] = SCI_NUM_PHASE_SHIFTS;
-  int n_ch = flux.nrow();
-  NumericVector p2vm_k = as<NumericVector>(p2vm["k"]);
-  NumericVector p2vm_s = as<NumericVector>(p2vm["sx"]);
-  
-  int i, j, k, l, m, n, phi, missing_phi;
-  double px[MAX_PHASE_SHIFTS], kx[MAX_PHASE_SHIFTS], sx[MAX_PHASE_SHIFTS], vv[2];
-  double sum_ch=0.0;
-  
-  // Sanity check
-  if (flux.ncol() != SCI_NUM_IO_OUTPUT) stop("unexpected number of io outputs\n");
-  
-  ComplexMatrix vis = ComplexMatrix(Dimension(n_ch, NUM_BASELINES));
-  
-  /* compute only 1 selected polarization */
-  m = 0; /* cummulative sum of the number of phase shifts */
-  for (i=0; i<NUM_BASELINES; i++)
-  {
-    for (j=0; j<n_ch; j++)
-    {
-      /* See comments in gvspc_calinfo_compute_v2pm() for details */
-      l = i*MAX_PHASE_SHIFTS*n_ch + j;
-      if (i > 2) l -= n_ch; /* skip the Y-junction */
-      
-      missing_phi = 0;
-      if (n_ps[i] != MAX_PHASE_SHIFTS)
-      {
-        for (k=0; k<MAX_PHASE_SHIFTS; k++)
-        {
-          missing_phi += k;
-          if ((ps_i[i*MAX_PHASE_SHIFTS+k] >= 0) &&
-          (ps_i[i*MAX_PHASE_SHIFTS+k] <= MAX_PHASE_SHIFTS))
-          missing_phi -= ps_i[i*MAX_PHASE_SHIFTS+k];
-        }
-      }
-      
-      sum_ch = 0.0;
-      for (k=0; k<MAX_PHASE_SHIFTS; k++)
-      {
-        /* After this loop, px, sx and kx are arranged so that the index
-        * 0,1,2,3 == A,B,C,D */
-        phi = ps_i[i*MAX_PHASE_SHIFTS+k];
-        if (phi < 0) continue;
-        n = l+k*n_ch;
-        px[phi] = flux[n] - dark[n];
-        sx[phi] = p2vm_s[n];
-        kx[phi] = p2vm_k[n];
-        sum_ch += px[phi];
-      }
-      /* this corrects for baselines with less than MAX_PHASE_SHIFTS */
-      if (n_ps[i] != MAX_PHASE_SHIFTS)
-      {
-        px[missing_phi] = sum_ch;
-        kx[missing_phi]  = 0.0;
-        sx[missing_phi]  = 1.0;
-      }
-      abcd2vis(&px[0], &kx[0], &sx[0], &vv[0], sum_ch);
-      vis[i*n_ch+j].r = vv[0];
-      vis[i*n_ch+j].i = vv[1];
-    }
-    m += n_ps[i];
-  }
-
-  return vis;
+  double e;
+	e  = 4*x*x*ex;
+	e += 4*y*y*ey;
+	return e;
 }
+
+// copied from cppgvspc
+double get_var_pd(double x, double y, double ex, double ey)
+{
+	double e;
+	e  = x*x*ex;
+	e += y*y*ey;
+	e *= (x*x + y*y)*(x*x + y*y);
+	return e;
+}
+
+// [[Rcpp::export]]
+List gv_sci_pix2vis_unsorted(NumericVector pixels, NumericVector rdnoiz, List v2pms)
+{
+  IntegerVector dim = pixels.attr("dim");
+  if ((dim.length() == 2) && (dim[0] != MAX_PHASE_SHIFTS*NUM_BASELINES))
+  {
+    REprintf("unexpected pixel dimension");
+    return List::create();
+  }
+  if (dim[1] != v2pms.length())
+  {
+    REprintf("pixel dimension and v2pms length mismatch");
+    return List::create();
+  }
+  
+  // for codes copied from cppgvspc
+  int n_tel=4, n_bl=6;
+  NumericMatrix tels(2,6);
+  // 2, 0, 0, 1, 1, 0 -> last bit slightly different from gv_telmat()
+  // 3, 3, 2, 3, 2, 1 -> last bit slightly different from gv_telmat()
+  tels(0,0)=2; tels(0,1)=0; tels(0,2)=0; tels(0,3)=1; tels(0,4)=1; tels(0,5)=0;
+  tels(1,0)=3; tels(1,1)=3; tels(1,2)=2; tels(1,3)=3; tels(1,4)=2; tels(1,5)=1;
+  
+  int nrow = dim[0], n_ch = dim[1];
+  NumericVector pix, rdn, w, coh, var_coh;
+  NumericVector flux(n_tel), var_flux(n_tel);
+//  NumericVector gd(n_bl), var_gd(n_bl);
+  ComplexMatrix vis(n_bl,n_ch);
+  NumericMatrix var_v_cos_pd(n_bl,n_ch), var_v_sin_pd(n_bl,n_ch);
+  NumericMatrix var_v2(n_bl,n_ch), var_pd(n_bl,n_ch);
+  List xx;
+  int t, i, j;
+  double x, y, f, e_v, e_f;
+  
+  for (int j=0; j<n_ch; j++)
+  {
+    int pix_offset = j*nrow;
+    pix = NumericVector(pixels.begin()+pix_offset, pixels.begin()+pix_offset+nrow);
+    rdn = NumericVector(rdnoiz.begin()+pix_offset, rdnoiz.begin()+pix_offset+nrow);
+    w   = abs(pix) + rdn;
+    xx  = gv_solvels(v2pms[j], pix, w);
+    coh = as<NumericVector>(xx["x"]); var_coh = as<NumericVector>(xx["var_x"]);
+    if (j == 0)
+    {
+      flux      = NumericVector(coh.begin(), coh.begin()+4);
+      var_flux  = NumericVector(var_coh.begin(), var_coh.begin()+4);
+    }
+    else
+    {
+      flux     += NumericVector(coh.begin(), coh.begin()+4);
+      var_flux += NumericVector(var_coh.begin(), var_coh.begin()+4);
+    }
+		// copied from cppgvspc but modified [] -> () for NumericMatrix
+    for (i=0; i<n_bl; i++)
+		{
+			f = coh[tels(0,i)] + coh[tels(1,i)];
+			x = coh[n_tel+0*n_bl+i];
+			y = coh[n_tel+1*n_bl+i];
+			vis(i,j).r = x/f;
+			vis(i,j).i = y/f;
+			e_f  = var_coh[tels(0,i)] + var_coh[tels(1,i)];
+			e_f /= f*f;
+			e_v  = var_coh[n_tel+0*n_bl+i];
+			e_v /= x*x;
+			var_v_cos_pd(i,j)  = vis(i,j).r*vis(i,j).r;
+			var_v_cos_pd(i,j) *= e_v + e_f;
+			e_v  = var_coh[n_tel+1*n_bl+i];
+			e_v /= y*y;
+			var_v_sin_pd(i,j)  = vis(i,j).i*vis(i,j).i;
+			var_v_sin_pd(i,j) *= e_v + e_f;
+      // copied from another section of cppgvspc
+      var_v2(i,j) = get_var_v2(vis(i,j).r, vis(i,j).i, var_v_cos_pd(i,j), var_v_sin_pd(i,j));
+      var_pd(i,j) = get_var_pd(vis(i,j).r, vis(i,j).i, var_v_cos_pd(i,j), var_v_sin_pd(i,j));
+		}
+  }
+  
+//  for (i=0; i<n_bl; i++)
+//  {
+//    xx = gv_vis2gd(vis.row(i));
+//    gd[i] = as<double>(xx["val"]); var_gd[i] = as<double>(xx["var"]);
+//  }
+  
+  return List::create(
+    Named("flux")=flux,
+    Named("var_flux")=var_flux,
+//    Named("gd")=gd,
+//    Named("var_gd")=var_gd,
+    Named("vis")=vis,
+    Named("var_v2")=var_v2,
+    Named("var_pd")=var_pd
+    );
+}
+

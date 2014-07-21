@@ -22,10 +22,6 @@ gv_const <- function() {
     .Call('gRavity_gv_const', PACKAGE = 'gRavity')
 }
 
-gv_pd2gd <- function(pd) {
-    .Call('gRavity_gv_pd2gd', PACKAGE = 'gRavity', pd)
-}
-
 #' FITS file reader
 #' 
 #' Reads a specific image HDU or extended binary table of a FITS files.
@@ -46,21 +42,31 @@ gv_readfits <- function(fits_name, hdu_name = "", col_name = "") {
 
 #' Strip images to relevant pixels
 #' 
-#' gv_sci_img2pix(img, cal$idx, cal$cnr, dim(cal$idx))
-gv_sci_img2pix <- function(img, idx, cnr, dim, n_wd = 3L) {
-    .Call('gRavity_gv_sci_img2pix', PACKAGE = 'gRavity', img, idx, cnr, dim, n_wd)
+#' gv_sci_img2pix(img, cal$idx, cal$cnr)
+#' 
+gv_sci_img2pix <- function(img, idx, cnr, isYjunc = 0L, n_wd = 3L) {
+    .Call('gRavity_gv_sci_img2pix', PACKAGE = 'gRavity', img, idx, cnr, isYjunc, n_wd)
 }
 
-#' Compute PD
-#' 
-#' Copied from gvspc codes.
-#' 
-gv_sci_pix2vis_unsorted <- function(flux, dark, p2vm) {
-    .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', flux, dark, p2vm)
+gv_sci_pix2vis_unsorted <- function(pixels, rdnoiz, v2pms) {
+    .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', pixels, rdnoiz, v2pms)
 }
 
-gv_solvels <- function(rA, rb, rvar_b) {
-    .Call('gRavity_gv_solvels', PACKAGE = 'gRavity', rA, rb, rvar_b)
+#' Solve for x in an Ax=b linear system
+#'
+#' The solution for x is inv(A)%*%b where inv(A) is computed by means of the
+#' singular value decomposition method.
+#'
+gv_solvels <- function(rA, rb, rw) {
+    .Call('gRavity_gv_solvels', PACKAGE = 'gRavity', rA, rb, rw)
+}
+
+#' Compute group delay from complex visibilities
+#' 
+#' Copied from cppgvspc
+#' 
+gv_vis2gd <- function(vis) {
+    .Call('gRavity_gv_vis2gd', PACKAGE = 'gRavity', vis)
 }
 
 rcpp_hello_world <- function() {
