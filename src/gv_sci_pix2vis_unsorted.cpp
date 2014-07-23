@@ -22,7 +22,8 @@ double get_var_pd(double x, double y, double ex, double ey)
 }
 
 // [[Rcpp::export]]
-List gv_sci_pix2vis_unsorted(NumericVector pixels, NumericVector rdnoiz, List v2pms)
+List gv_sci_pix2vis_unsorted(NumericVector pixels, List v2pms,
+  NumericVector rdnoiz = NumericVector())
 {
   IntegerVector dim = pixels.attr("dim");
   if ((dim.length() == 2) && (dim[0] != MAX_PHASE_SHIFTS*NUM_BASELINES))
@@ -59,8 +60,12 @@ List gv_sci_pix2vis_unsorted(NumericVector pixels, NumericVector rdnoiz, List v2
   {
     int pix_offset = j*nrow;
     pix = NumericVector(pixels.begin()+pix_offset, pixels.begin()+pix_offset+nrow);
-    rdn = NumericVector(rdnoiz.begin()+pix_offset, rdnoiz.begin()+pix_offset+nrow);
-    w   = abs(pix) + rdn;
+    w   = abs(pix);
+    if (rdnoiz.length() != 0)
+    {
+      rdn = NumericVector(rdnoiz.begin()+pix_offset, rdnoiz.begin()+pix_offset+nrow);
+      w  += rdn;
+    }
     xx  = gv_solvels(v2pms[j], pix, w);
     coh = as<NumericVector>(xx["x"]); var_coh = as<NumericVector>(xx["var_x"]);
     if (j == 0)

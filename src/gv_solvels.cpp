@@ -47,7 +47,7 @@ void sv_threshold(gsl_vector *s, int n)
 //' singular value decomposition method.
 //'
 // [[Rcpp::export]]
-List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw)
+List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw = NumericVector())
 {
   if (rA.nrow() != rb.length())
   {
@@ -62,7 +62,7 @@ List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw)
 	// setup the main structure, i.e. Ax = b
 	gsl_matrix *A = gsl_matrix_alloc(nrow, ncol);
 	gsl_vector *b = gsl_vector_alloc(nrow);
-	gsl_matrix *W = (rw.size() == 0) ? NULL : gsl_matrix_calloc(nrow, nrow);
+	gsl_matrix *W = (rw.length() == 0) ? NULL : gsl_matrix_calloc(nrow, nrow);
 	NumericVector x(ncol), var_x(ncol);
   
 	for (i=0; i<nrow; i++)

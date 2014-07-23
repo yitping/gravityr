@@ -3,9 +3,9 @@
 #' Computes the complex visibilty of the SCI fringes in a pixel array
 #' 
 #' @export
-gv_sci_pix2vis <- function (pixels, rdnoiz, v2pms, blseq=NULL)
+gv_sci_pix2vis <- function (pixels, v2pms, rdnoiz, blseq=NULL)
 {
-  coh <- gv_sci_pix2vis_unsorted(pixels, rdnoiz, v2pms)
+  coh <- gv_sci_pix2vis_unsorted(pixels, v2pms, rdnoiz)
   if (!is.list(blseq))
   {
     blseq <- gv_blorder(gv_telmat())

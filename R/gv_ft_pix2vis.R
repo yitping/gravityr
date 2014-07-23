@@ -1,8 +1,8 @@
 #' Computes the complex visibilty of fringes
 #' 
-#' Computes the complex visibilty of the SCI fringes in a pixel array
+#' Computes the complex visibilty of the FT fringes in a pixel array
 #'
-gv_ft_pix2vis <- function (flux, dark, p2vm, blseq=NULL)
+gv_ft_pix2vis <- function (flux, p2vm, blseq=NULL)
 {
 	if (!is.list(blseq))
 	{
@@ -10,7 +10,7 @@ gv_ft_pix2vis <- function (flux, dark, p2vm, blseq=NULL)
 		# verified with CP
 		blseq$sign[c(1,2)] <- 1
 	}
-	px <- flux - dark
+	px <- flux
 	dim(px) <- c(4, 6, 5)
 	px <- px[,blseq$order,]
   #fl <- t(apply(px, c(2,3), sum))
