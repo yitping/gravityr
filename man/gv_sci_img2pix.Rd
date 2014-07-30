@@ -3,9 +3,9 @@
 \alias{gv_sci_img2pix}
 \title{Strip images to relevant pixels}
 \usage{
-gv_sci_img2pix(img, idx, cnr, dim, n_wd = 3L)
+gv_sci_img2pix(img, idx, cnr, isYjunc = 0L, n_wd = 3L)
 }
 \description{
-gv_sci_img2pix(img, cal$idx, cal$cnr, dim(cal$idx))
+gv_sci_img2pix(img, cal$idx, cal$cnr)
 }
 

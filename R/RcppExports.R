@@ -48,8 +48,12 @@ gv_sci_img2pix <- function(img, idx, cnr, isYjunc = 0L, n_wd = 3L) {
     .Call('gRavity_gv_sci_img2pix', PACKAGE = 'gRavity', img, idx, cnr, isYjunc, n_wd)
 }
 
-gv_sci_pix2vis_unsorted <- function(pixels, rdnoiz, v2pms) {
-    .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', pixels, rdnoiz, v2pms)
+#' Compute complex visibility of SCI fringes
+#' 
+#' Copied from gvspc codes.
+#' 
+gv_sci_pix2vis_unsorted <- function(pixels, v2pms, rdnoiz = numeric()) {
+    .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', pixels, v2pms, rdnoiz)
 }
 
 #' Solve for x in an Ax=b linear system
@@ -57,7 +61,7 @@ gv_sci_pix2vis_unsorted <- function(pixels, rdnoiz, v2pms) {
 #' The solution for x is inv(A)%*%b where inv(A) is computed by means of the
 #' singular value decomposition method.
 #'
-gv_solvels <- function(rA, rb, rw) {
+gv_solvels <- function(rA, rb, rw = numeric()) {
     .Call('gRavity_gv_solvels', PACKAGE = 'gRavity', rA, rb, rw)
 }
 

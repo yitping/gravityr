@@ -74,16 +74,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // gv_sci_pix2vis_unsorted
-List gv_sci_pix2vis_unsorted(NumericVector pixels, NumericVector rdnoiz, List v2pms);
-RcppExport SEXP gRavity_gv_sci_pix2vis_unsorted(SEXP pixelsSEXP, SEXP rdnoizSEXP, SEXP v2pmsSEXP) {
+List gv_sci_pix2vis_unsorted(NumericVector pixels, List v2pms, NumericVector rdnoiz = NumericVector());
+RcppExport SEXP gRavity_gv_sci_pix2vis_unsorted(SEXP pixelsSEXP, SEXP v2pmsSEXP, SEXP rdnoizSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< NumericVector >::type pixels(pixelsSEXP );
-        Rcpp::traits::input_parameter< NumericVector >::type rdnoiz(rdnoizSEXP );
         Rcpp::traits::input_parameter< List >::type v2pms(v2pmsSEXP );
-        List __result = gv_sci_pix2vis_unsorted(pixels, rdnoiz, v2pms);
+        Rcpp::traits::input_parameter< NumericVector >::type rdnoiz(rdnoizSEXP );
+        List __result = gv_sci_pix2vis_unsorted(pixels, v2pms, rdnoiz);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -91,7 +91,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // gv_solvels
-List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw);
+List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw = NumericVector());
 RcppExport SEXP gRavity_gv_solvels(SEXP rASEXP, SEXP rbSEXP, SEXP rwSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;

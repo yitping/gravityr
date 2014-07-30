@@ -3,17 +3,17 @@
 \alias{gv_sci_fits2vis}
 \title{Computes the complex visibility of the fringes}
 \usage{
-gv_sci_fits2vis(fits, p2vm, cal, dark = 0, p = 1,
-  hdu = "imaging_data_spe", blseq = NULL)
+gv_sci_fits2vis(fits, v2pms, dark, cal, p = 1, hdu = "imaging_data_spe",
+  blseq = NULL)
 }
 \arguments{
 \item{fits}{A GRAVITY FITS file}
 
 \item{cal}{A list of calibration coefficients}
 
-\item{p2vm}{A list of P2VM coefficients}
+\item{v2pms}{A list of V2PM coefficients}
 
-\item{dark}{Optional (temp). Dark pixels from gv_sci_img2pix().}
+\item{dark}{Dark pixels and read noise from gv_sci_Nfits2pix().}
 
 \item{p}{Optional. Polarization states to process.}
 

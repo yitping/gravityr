@@ -21,6 +21,10 @@ double get_var_pd(double x, double y, double ex, double ey)
 	return e;
 }
 
+//' Compute complex visibility of SCI fringes
+//' 
+//' Copied from gvspc codes.
+//' 
 // [[Rcpp::export]]
 List gv_sci_pix2vis_unsorted(NumericVector pixels, List v2pms,
   NumericVector rdnoiz = NumericVector())

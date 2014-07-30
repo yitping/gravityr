@@ -12,7 +12,7 @@
 #' 
 #' @return A 3D cube of complex visibility vs. spectral channel vs. baseline vs. number of image frames.
 #'
-gv_sci_fits2vis <- function (fits, dark, v2pms, cal,
+gv_sci_fits2vis <- function (fits, v2pms, dark, cal,
                              p=1, hdu='imaging_data_spe',
                              blseq=NULL)
 {
@@ -28,6 +28,6 @@ gv_sci_fits2vis <- function (fits, dark, v2pms, cal,
   n_pl <- dim(pixs[[1]])[3]
   cv  <- lapply(1:length(pixs), function (i)
   {
-    vis <- gv_sci_pix2vis(pixs[[i]][,,p], dark$var[,,p], v2pms[(p-1)*n_ch+(1:n_ch)], blseq=blseq)
+    vis <- gv_sci_pix2vis(pixs[[i]][,,p], v2pms[(p-1)*n_ch+(1:n_ch)], dark$var[,,p], blseq=blseq)
   })
 }

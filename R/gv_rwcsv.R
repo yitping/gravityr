@@ -45,6 +45,13 @@ gv_readcsv <- function (filein)
 }
 
 #' @export
-gv_writecsv <- function (fileout, arr, append=T)
+gv_writecsv <- function (fileout, arrname, arr, append=F)
 {
+  sz <- dim(arr)
+  if (length(sz) == 0) { sz <- c(1,length(arr)); arr <- rbind(arr) }
+  hdr <- sprintf('# %s, %d, %d', arrname, sz[1], sz[2])
+  write.table(hdr, file=fileout, append=append,
+              sep=',', row.names=FALSE, col.names=FALSE, quote=FALSE)
+  write.table(arr, file=fileout, append=T,
+              sep=',', row.names=FALSE, col.names=FALSE, quote=FALSE)
 }

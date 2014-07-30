@@ -3,9 +3,9 @@
 \alias{gv_ft_pix2vis}
 \title{Computes the complex visibilty of fringes}
 \usage{
-gv_ft_pix2vis(flux, dark, p2vm, blseq = NULL)
+gv_ft_pix2vis(flux, p2vm, blseq = NULL)
 }
 \description{
-Computes the complex visibilty of the SCI fringes in a pixel array
+Computes the complex visibilty of the FT fringes in a pixel array
 }
 
