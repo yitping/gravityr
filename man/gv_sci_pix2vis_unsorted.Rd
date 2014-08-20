@@ -3,9 +3,31 @@
 \alias{gv_sci_pix2vis_unsorted}
 \title{Compute complex visibility of SCI fringes}
 \usage{
-gv_sci_pix2vis_unsorted(pixels, v2pms, rdnoiz = numeric())
+gv_sci_pix2vis_unsorted(pixels, v2pms, rdnoiz = numeric(), bad = numeric())
+}
+\arguments{
+\item{pixels}{Matrix of pixel values.}
+
+\item{v2pms}{List of v2pms.}
+
+\item{rdnoiz}{Optional. Matrix of variance of each pixels (obtained from dark frames).}
+
+\item{bad}{Optional. Vector indicating bad spectral channels.}
 }
 \description{
 Copied from gvspc codes.
+}
+\examples{
+\dontrun{
+ img  <- gv_readfits(fits$dark, hdu='imaging_data_spe')
+ dark_img  <- apply(img[,,1:dim(img)[3]], c(1,2), mean)
+ dark_pixs <- lapply(1:dim(img)[3], function (i) gv_sci_img2pix(img[,,i], cal$idx, cal$corner))
+ dark_pixs <- simplify2array(dark_pixs, higher=T)
+ rdnoiz <- apply(dark_pixs, c(1,2,3), var)
+ img <- gv_readfits(fits$flux, hdu='imaging_data_spe')
+ flux_pixs <- lapply(1:dim(img)[3], function (i) gv_sci_img2pix(img[,,i]-dark_img, cal$idx, cal$corner))
+ bad <- which(sapply(v2pms, function (v) any(is.na(v))))
+ coh <- gv_sci_pix2vis_unsorted(flux_pixs[[1]][,,1], v2pms, rdnoiz, bad)
+}
 }
 

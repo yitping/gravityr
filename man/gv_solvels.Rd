@@ -5,6 +5,17 @@
 \usage{
 gv_solvels(rA, rb, rw = numeric())
 }
+\arguments{
+\item{rA}{Matrix A}
+
+\item{rb}{Vector b}
+
+\item{rw}{Vector w, which essentially is the diagonal of the weights matrix.}
+}
+\value{
+\item{x}{Vector x}
+\item{var_x}{Variance of x, estimated from w and the covariance matrix}
+}
 \description{
 The solution for x is inv(A)%*%b where inv(A) is computed by means of the
 singular value decomposition method.

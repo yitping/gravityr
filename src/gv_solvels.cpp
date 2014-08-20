@@ -45,6 +45,13 @@ void sv_threshold(gsl_vector *s, int n)
 //'
 //' The solution for x is inv(A)%*%b where inv(A) is computed by means of the
 //' singular value decomposition method.
+//' 
+//' @param rA Matrix A
+//' @param rb Vector b
+//' @param rw Vector w, which essentially is the diagonal of the weights matrix.
+//' @return
+//' \item{x}{Vector x}
+//' \item{var_x}{Variance of x, estimated from w and the covariance matrix}
 //'
 // [[Rcpp::export]]
 List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw = NumericVector())
@@ -52,7 +59,7 @@ List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw = NumericVe
   if (rA.nrow() != rb.length())
   {
     REprintf("A and b sizes mismatch\n");
-    return R_NilValue;
+    return List::create();
   }
 
 	int nrow = rA.nrow();

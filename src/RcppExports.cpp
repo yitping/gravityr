@@ -74,8 +74,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // gv_sci_pix2vis_unsorted
-List gv_sci_pix2vis_unsorted(NumericVector pixels, List v2pms, NumericVector rdnoiz = NumericVector());
-RcppExport SEXP gRavity_gv_sci_pix2vis_unsorted(SEXP pixelsSEXP, SEXP v2pmsSEXP, SEXP rdnoizSEXP) {
+List gv_sci_pix2vis_unsorted(NumericVector pixels, List v2pms, NumericVector rdnoiz = NumericVector(), NumericVector bad = NumericVector());
+RcppExport SEXP gRavity_gv_sci_pix2vis_unsorted(SEXP pixelsSEXP, SEXP v2pmsSEXP, SEXP rdnoizSEXP, SEXP badSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -83,7 +83,8 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< NumericVector >::type pixels(pixelsSEXP );
         Rcpp::traits::input_parameter< List >::type v2pms(v2pmsSEXP );
         Rcpp::traits::input_parameter< NumericVector >::type rdnoiz(rdnoizSEXP );
-        List __result = gv_sci_pix2vis_unsorted(pixels, v2pms, rdnoiz);
+        Rcpp::traits::input_parameter< NumericVector >::type bad(badSEXP );
+        List __result = gv_sci_pix2vis_unsorted(pixels, v2pms, rdnoiz, bad);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -137,13 +138,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // timesTwo
-NumericVector timesTwo();
-RcppExport SEXP gRavity_timesTwo() {
+NumericVector timesTwo(int j, NumericVector bad = NumericVector());
+RcppExport SEXP gRavity_timesTwo(SEXP jSEXP, SEXP badSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        NumericVector __result = timesTwo();
+        Rcpp::traits::input_parameter< int >::type j(jSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type bad(badSEXP );
+        NumericVector __result = timesTwo(j, bad);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

@@ -12,7 +12,10 @@ gv_vis2opd(cv, R = 1, lam = 1, type = "pd", debug = F)
 
 \item{lam}{Optional. Wavelength in the middle of the spectrum.}
 
-\item{type}{Optional. Selects the gallery.}
+\item{type}{Optional. Selects between the following:
+\item{pd}{Phase delay (default)}
+\item{gd}{Group delay}
+\item{op}{OPD (experimental)}}
 }
 \value{
 Estimated OPD.

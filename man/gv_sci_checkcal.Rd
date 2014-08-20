@@ -3,8 +3,8 @@
 \alias{gv_sci_checkcal}
 \title{Check SCI detector calibration text file}
 \usage{
-gv_sci_checkcal(file_cal, file_fits, file_eps = "", ext = ".csv", rev = 3,
-  hdu = "imaging_data_spe", frnum = 1)
+gv_sci_checkcal(file_cal, file_fits, file_dark = NULL, file_eps = NULL,
+  rev = 3, hdu = "imaging_data_spe")
 }
 \arguments{
 \item{file_cal}{The calibration file}
@@ -13,13 +13,9 @@ gv_sci_checkcal(file_cal, file_fits, file_eps = "", ext = ".csv", rev = 3,
 
 \item{file_eps}{Optional. An eps file to export plot. By default, no.}
 
-\item{ext}{Optional. File extension of file_cal.}
-
 \item{rev}{Optional. For development purpose.}
 
 \item{hdu}{Optional. The name of the HDU containing the images. For primary HDU, set it to an empty string.}
-
-\item{frnum}{Optional. The frame of a 3D cube of images to check the calibration with.}
 }
 \description{
 Cross-check the indices in the calibration file, which are shared between

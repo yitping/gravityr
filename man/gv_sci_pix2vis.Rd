@@ -3,9 +3,26 @@
 \alias{gv_sci_pix2vis}
 \title{Computes the complex visibilty of fringes}
 \usage{
-gv_sci_pix2vis(pixels, v2pms, rdnoiz, blseq = NULL)
+gv_sci_pix2vis(pixels, v2pms, rdnoiz, bad = NULL, blseq = NULL)
+}
+\arguments{
+\item{blseq}{Optional. An vector that contains indices to rearrange the baseline order.}
+
+\item{pixels}{Matrix of pixel values.}
+
+\item{v2pms}{List of v2pms.}
+
+\item{rdnoiz}{Optional. Matrix of variance of each pixels (obtained from dark frames).}
+
+\item{bad}{Optional. Vector indicating bad spectral channels.}
 }
 \description{
-Computes the complex visibilty of the SCI fringes in a pixel array
+Computes the complex visibilty of the SCI fringes in a pixel array.
+}
+\details{
+This is a wrapping function for \code{\link{gv_sci_pix2vis_unsorted}} and performs
+some post-processing to the computed complex visibility.
+
+The nominal baseline order of the SCI spectrometer is given as: ...
 }
 

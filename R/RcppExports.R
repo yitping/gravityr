@@ -51,15 +51,38 @@ gv_sci_img2pix <- function(img, idx, cnr, isYjunc = 0L, n_wd = 3L) {
 #' Compute complex visibility of SCI fringes
 #' 
 #' Copied from gvspc codes.
+#' @param pixels Matrix of pixel values.
+#' @param v2pms List of v2pms.
+#' @param rdnoiz Optional. Matrix of variance of each pixels (obtained from dark frames). 
+#' @param bad Optional. Vector indicating bad spectral channels.
 #' 
-gv_sci_pix2vis_unsorted <- function(pixels, v2pms, rdnoiz = numeric()) {
-    .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', pixels, v2pms, rdnoiz)
+#' @examples \dontrun{
+#'  img  <- gv_readfits(fits$dark, hdu='imaging_data_spe')
+#'  dark_img  <- apply(img[,,1:dim(img)[3]], c(1,2), mean)
+#'  dark_pixs <- lapply(1:dim(img)[3], function (i) gv_sci_img2pix(img[,,i], cal$idx, cal$corner))
+#'  dark_pixs <- simplify2array(dark_pixs, higher=T)
+#'  rdnoiz <- apply(dark_pixs, c(1,2,3), var)
+#'  img <- gv_readfits(fits$flux, hdu='imaging_data_spe')
+#'  flux_pixs <- lapply(1:dim(img)[3], function (i) gv_sci_img2pix(img[,,i]-dark_img, cal$idx, cal$corner))
+#'  bad <- which(sapply(v2pms, function (v) any(is.na(v))))
+#'  coh <- gv_sci_pix2vis_unsorted(flux_pixs[[1]][,,1], v2pms, rdnoiz, bad)
+#' }
+#' 
+gv_sci_pix2vis_unsorted <- function(pixels, v2pms, rdnoiz = numeric(), bad = numeric()) {
+    .Call('gRavity_gv_sci_pix2vis_unsorted', PACKAGE = 'gRavity', pixels, v2pms, rdnoiz, bad)
 }
 
 #' Solve for x in an Ax=b linear system
 #'
 #' The solution for x is inv(A)%*%b where inv(A) is computed by means of the
 #' singular value decomposition method.
+#' 
+#' @param rA Matrix A
+#' @param rb Vector b
+#' @param rw Vector w, which essentially is the diagonal of the weights matrix.
+#' @return
+#' \item{x}{Vector x}
+#' \item{var_x}{Variance of x, estimated from w and the covariance matrix}
 #'
 gv_solvels <- function(rA, rb, rw = numeric()) {
     .Call('gRavity_gv_solvels', PACKAGE = 'gRavity', rA, rb, rw)
@@ -77,7 +100,7 @@ rcpp_hello_world <- function() {
     .Call('gRavity_rcpp_hello_world', PACKAGE = 'gRavity')
 }
 
-timesTwo <- function() {
-    .Call('gRavity_timesTwo', PACKAGE = 'gRavity')
+timesTwo <- function(j, bad = numeric()) {
+    .Call('gRavity_timesTwo', PACKAGE = 'gRavity', j, bad)
 }
 
