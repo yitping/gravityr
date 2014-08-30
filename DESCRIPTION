@@ -2,11 +2,11 @@ Package: gRavity
 Type: Package
 Title: Basic functions to read and reduce GRAVITY FITS files
 Version: 1.0
-Date: 2014-06-29
+Date: 2014-08-31
 Authors@R: c(person("Yitping", "Kok", role=c("aut", "cre"),
     email="yitping@mpe.mpg.de"))
 Maintainer: Yitping Kok <yitping@mpe.mpg.de>
-Description: More about what it does (maybe more than one line)
+Description: This title says it all.
 License: GPL-3
 Imports: Rcpp (>= 0.11.2)
 LinkingTo: Rcpp

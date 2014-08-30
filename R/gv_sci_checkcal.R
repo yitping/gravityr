@@ -64,7 +64,7 @@ gv_sci_checkcal <- function (file_cal, file_fits, file_dark=NULL, file_eps=NULL,
 
   if (!is.null(file_eps))
   {
-    setEPS(width=10, height=4)
+    setEPS(width=20, height=8)
     postscript(file_eps, horizontal=F)
   }
   par(mfrow=c(1,2), mar=c(4,2,1,1), oma=c(1,3,0,0))

@@ -96,11 +96,3 @@ gv_vis2gd <- function(vis) {
     .Call('gRavity_gv_vis2gd', PACKAGE = 'gRavity', vis)
 }
 
-rcpp_hello_world <- function() {
-    .Call('gRavity_rcpp_hello_world', PACKAGE = 'gRavity')
-}
-
-timesTwo <- function(j, bad = numeric()) {
-    .Call('gRavity_timesTwo', PACKAGE = 'gRavity', j, bad)
-}
-

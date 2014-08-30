@@ -13,8 +13,8 @@ List gv_const()
 {
   int default_sci_n_ps[] = SCI_NUM_PHASE_SHIFTS;
   int default_sci_ps_i[] = SCI_IDX_PHASE_SHIFTS;
-  std::vector<int> sci_n_ps(std::begin(default_sci_n_ps), std::end(default_sci_n_ps));
-  std::vector<int> sci_ps_i(std::begin(default_sci_ps_i), std::end(default_sci_ps_i));
+  std::vector<int> sci_n_ps(default_sci_n_ps, default_sci_n_ps+sizeof(default_sci_n_ps)/sizeof(int));
+  std::vector<int> sci_ps_i(default_sci_ps_i, default_sci_ps_i+sizeof(default_sci_ps_i)/sizeof(int));
   
   return List::create(
     Named("ft_io_out")=24,

@@ -1,6 +1,6 @@
-#' Rounding up phases
+#' Nearest integer multiple of a given phase
 #' 
-#' @param p A variable in radians
+#' @param p Phase in radians
 #' @export
 #' 
 gv_round_phase <- function (p)
@@ -8,21 +8,26 @@ gv_round_phase <- function (p)
   2*pi*((floor(abs(p)/pi) + floor(abs(p)/pi)%%2)/2)*(p/abs(p))
 }
 
+#' Modulo 2\eqn{\pi} of a given phase
+#' @param p Phase in radians
 #' @export
 #' 
 gv_modulo_phase <- function (p) { p-gv_round_phase(p) }
 
-#' Estimate OPD from spectrally dispersed fringes.
+#' Estimate OPD from complex visibility.
 #' 
-#' Visibility
+#' Esimate OPD from complex visibility of spectrally dispersed fringes.
 #' 
 #' @param cv Complex visibility vector
 #' @param R Optional. Spectral resolution of the spectrometer.
 #' @param lam Optional. Wavelength in the middle of the spectrum.
-#' @param type Optional. Selects between the following:
-#' \item{pd}{Phase delay (default)}
-#' \item{gd}{Group delay}
-#' \item{op}{OPD (experimental)}
+#' @param type Optional. Selects how OPD is computed.
+#' @details Selects between the following:
+#' \itemize{
+#'   \item{pd}{Phase delay (default)}
+#'   \item{gd}{Group delay}
+#'   \item{op}{OPD (experimental)}
+#' }
 #' @return Estimated OPD.
 #' @export
 #' 

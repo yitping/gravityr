@@ -1,0 +1,65 @@
+# Installation on Linux
+
+There are two prerequisite C/C++ libraries for this R package.
+
+* cfitsio:
+  - A library of C and Fortran subroutines for reading and writing data files in
+    FITS (Flexible Image Transport System) data format.
+  - For download and installation details, go to
+    http://heasarc.nasa.gov/fitsio/fitsio.html
+
+* gsl:
+  - A library of C subroutines that provides a wide range of mathematical
+    functions.
+  - This library should have been readily installed in many Linux systems.
+  - If not already installed, download the library from
+    http://www.gnu.org/software/gsl/
+
+
+Ignore the following installation instrucation and edit the src/Makevars file to
+point to the right include and lib path. Then invoke the following,
+
+$ R CMD INSTALL gRavity
+
+
+--- FOR FUTURE INSTALLATION OPTION, IGNORE FOR NOW ---
+There are two ways to install the R package. First, by passing the necessary
+paths to the oifitslib through --configure-args input option.
+
+$ R CMD INSTALL --configure-args=' \
+  --with-cfitsio-include=/path/to/cfitsio/include \
+  --with-cfitsio-lib=/path/to/cfitsio/lib' \
+  gRavity
+
+Second, by passing the necessary paths to the oifitslib through environment
+settings.
+
+$ setenv CFITSIO_INCLUDE /path/to/cfitsio/include
+$ setenv CFITSIO_LIB /path/to/cfitsio/lib
+$ R CMD INSTALL gRavity
+--- FOR FUTURE INSTALLATION OPTION, IGNORE FOR NOW ---
+
+
+# Installation on Mac OS X
+
+The installation procedure is similar to the above but in order to install
+oifitslib, an additional library, glib2, has to be first installed. The
+latter is not usually pre-installed on a Mac OS X machine but can be obtained
+from one of several package managers, e.g. MacPorts (https://www.macports.org),
+Homebrew (http://brew.sh) or Fink (http://www.finkproject.org).
+
+Below is a procedure to install this package based on MacPorts.
+
+1. Install XCode and its Command Line Tools
+2. Install MacPorts
+3. Install gsl with MacPorts (e.g. "sudo port install gsl")
+4. Install cfitsio with MacPorts (e.g. "sudo port install cfitsio")
+5. Install the R package as documented above.
+
+
+# Installation on Windows
+
+The procedure to install this package on to a Windows machine is currently not
+available. However, the authors would be happy to support any such installation
+by keen users so that a standard procedure can be determined and added here in
+the future.
