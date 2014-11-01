@@ -5,6 +5,13 @@
 \usage{
 gv_sci_Nfits2pix(fits, cal, hdu = "")
 }
+\arguments{
+\item{fits}{FITS files}
+
+\item{cal}{List of calibration matrices}
+
+\item{hdu}{Name of the HDU table to be read}
+}
 \description{
 Read multiple fits
 }

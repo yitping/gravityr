@@ -2,6 +2,12 @@
 #' 
 #' Computes the complex visibilty of the FT fringes in a given FITS file
 #'
+#' @param fits FITS file
+#' @param p2vm P2VM list
+#' @param hdu Name of the HDU table to be read
+#' 
+#' @export
+#' 
 gv_ft_fits2vis <- function (fits, p2vm,
 														dark=0, p=1, hdu='imaging_data_ft',
 														blseq=NULL, ma=5)

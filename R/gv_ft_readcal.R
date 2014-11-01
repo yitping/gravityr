@@ -1,4 +1,7 @@
 #' Parse FT detector calibration text file
 #'
-#'
-gv_ft_readcal <- function (file_cal) { gv_readcsv(file_cal) }
+#' @param file Calibration file
+#' 
+#' @export
+#' 
+gv_ft_readcal <- function (file) { gv_readcsv(file) }

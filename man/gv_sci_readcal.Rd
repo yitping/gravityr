@@ -3,10 +3,10 @@
 \alias{gv_sci_readcal}
 \title{Parse SCI detector calibration text file}
 \usage{
-gv_sci_readcal(file_cal, n_io = gv_const()$sci_io_out)
+gv_sci_readcal(file, n_io = gv_const()$sci_io_out)
 }
 \arguments{
-\item{file_cal}{The calibration file}
+\item{file}{The calibration file}
 }
 \description{
 Read the SCI detector calibration file and format the content properly for

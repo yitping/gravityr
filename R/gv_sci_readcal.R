@@ -4,11 +4,13 @@
 #' usage with other GRAVITY R functions, e.g. to convert the SCI raw images to
 #' pixel arrays, etc.
 #' 
-#' @param file_cal The calibration file
+#' @param file The calibration file
 #' 
-gv_sci_readcal <- function (file_cal, n_io=gv_const()$sci_io_out)
+#' @export
+#' 
+gv_sci_readcal <- function (file, n_io=gv_const()$sci_io_out)
 {
-  cal <- gv_readcsv(file_cal)
+  cal <- gv_readcsv(file)
   # reformat idx
   n_pl <- dim(cal$idx)[1]/n_io
   ii <- t(cal$idx)

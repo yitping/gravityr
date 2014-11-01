@@ -2,6 +2,11 @@
 #' 
 #' Computes the complex visibilty of the FT fringes in a pixel array
 #'
+#' @param flux Vector of pixel values
+#' @param p2vm List of P2VM matrices
+#'
+#' @export
+#' 
 gv_ft_pix2vis <- function (flux, p2vm, blseq=NULL)
 {
 	if (!is.list(blseq))

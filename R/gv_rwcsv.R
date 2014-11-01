@@ -11,6 +11,7 @@
 #' @return A named list of arrays
 #' 
 #' @export
+#' 
 gv_readcsv <- function (filein)
 {
 	# first pass
@@ -44,7 +45,12 @@ gv_readcsv <- function (filein)
 	return(arr)
 }
 
+#' Read and write a custom formatted CSV file
+#' 
+#' @inheritParams gv_sci_pix2vis_unsorted
+#' 
 #' @export
+#' 
 gv_writecsv <- function (fileout, arrname, arr, append=F)
 {
   sz <- dim(arr)

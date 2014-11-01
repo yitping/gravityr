@@ -5,6 +5,9 @@
 \usage{
 gv_cpmat(flip = F)
 }
+\arguments{
+\item{Optional.}{Flip the matrix.}
+}
 \description{
 Maps a vector of baselines to a vector of closed triangles.
 }

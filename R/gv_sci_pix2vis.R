@@ -11,6 +11,7 @@
 #' @param blseq Optional. An vector that contains indices to rearrange the baseline order.
 #' 
 #' @export
+#' 
 gv_sci_pix2vis <- function (pixels, v2pms, rdnoiz, bad=NULL, blseq=NULL)
 {
   if (!is.null(bad)) coh <- gv_sci_pix2vis_unsorted(pixels, v2pms, rdnoiz, bad)

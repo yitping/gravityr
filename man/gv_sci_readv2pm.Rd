@@ -3,10 +3,10 @@
 \alias{gv_sci_readv2pm}
 \title{Parse SCI V2PM text file}
 \usage{
-gv_sci_readv2pm(file_v2pm)
+gv_sci_readv2pm(file)
 }
 \arguments{
-\item{file_p2vm}{The P2VM file}
+\item{file}{P2VM file}
 }
 \description{
 Read the SCI detector V2PM file and format the content properly for usage

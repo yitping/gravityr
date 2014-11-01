@@ -3,7 +3,10 @@
 \alias{gv_ft_readp2vm}
 \title{Parse FT P2VM text file}
 \usage{
-gv_ft_readp2vm(file_p2vm)
+gv_ft_readp2vm(file)
+}
+\arguments{
+\item{file}{P2VM file}
 }
 \description{
 Parse FT P2VM text file

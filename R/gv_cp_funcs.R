@@ -8,6 +8,7 @@
 #' @return A vector of closure phases or OPDs
 #' 
 #' @export
+#' 
 gv_vis2cp <- function (vis, cpi=rbind(c(1,4,2), c(1,5,3), c(4,6,5)))
 {
   apply(cpi, 1, function (bli) vis[bli[1]]*vis[bli[2]]*Conj(vis[bli[3]]))

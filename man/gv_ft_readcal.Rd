@@ -3,7 +3,10 @@
 \alias{gv_ft_readcal}
 \title{Parse FT detector calibration text file}
 \usage{
-gv_ft_readcal(file_cal)
+gv_ft_readcal(file)
+}
+\arguments{
+\item{file}{Calibration file}
 }
 \description{
 Parse FT detector calibration text file

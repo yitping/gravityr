@@ -12,6 +12,8 @@
 #' 
 #' @return A 3D cube of complex visibility vs. spectral channel vs. baseline vs. number of image frames.
 #'
+#' @export
+#' 
 gv_sci_fits2vis <- function (fits, v2pms, dark, cal,
                              p=1, hdu='imaging_data_spe',
                              blseq=NULL)

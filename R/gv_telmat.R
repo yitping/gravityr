@@ -7,6 +7,7 @@
 #' @param map  Telescope vector
 #'
 #' @export
+#' 
 gv_telmat <- function (map=gv_const()$sci_telarr, flip=T)
 {
   N <- length(map)

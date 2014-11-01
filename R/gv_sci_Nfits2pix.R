@@ -1,6 +1,11 @@
 #' Read multiple fits
 #' 
+#' @param fits FITS files
+#' @param cal List of calibration matrices
+#' @param hdu Name of the HDU table to be read
+#' 
 #' @export
+#' 
 gv_sci_Nfits2pix <- function (fits, cal, hdu='')
 {
   n_fits <- length(fits)

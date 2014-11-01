@@ -2,6 +2,10 @@
 #' 
 #' Maps a vector of baselines to a vector of closed triangles.
 #' 
+#' @param Optional. Flip the matrix.
+#' 
+#' @export
+#' 
 gv_cpmat <- function (flip=F)
 {
   # assumes baseline vec = 1-2, 1-3, 1-4, 2-3, 2-4, 3-4

@@ -1,6 +1,7 @@
 #' Nearest integer multiple of a given phase
 #' 
 #' @param p Phase in radians
+#' 
 #' @export
 #' 
 gv_round_phase <- function (p)
@@ -9,7 +10,9 @@ gv_round_phase <- function (p)
 }
 
 #' Modulo 2\eqn{\pi} of a given phase
+#' 
 #' @param p Phase in radians
+#' 
 #' @export
 #' 
 gv_modulo_phase <- function (p) { p-gv_round_phase(p) }
@@ -29,6 +32,7 @@ gv_modulo_phase <- function (p) { p-gv_round_phase(p) }
 #'   \item{op}{OPD (experimental)}
 #' }
 #' @return Estimated OPD.
+#' 
 #' @export
 #' 
 gv_vis2opd <- function (cv, R=1, lam=1, type='pd', debug=F)

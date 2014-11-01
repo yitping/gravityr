@@ -6,6 +6,7 @@
 #' @param M telescope matrix of size 6x4
 #' 
 #' @export
+#' 
 gv_blorder <- function (M)
 {
   M_default <- rbind(c( 1,-1, 0, 0),

@@ -1,5 +1,4 @@
 #' Check SCI detector calibration text file
-#' 
 #' Cross-check the indices in the calibration file, which are shared between
 #' R and C/C++ functions, with an actual FITS file.
 #' 
@@ -11,6 +10,8 @@
 #' @param file_eps Optional. An eps file to export plot. By default, no.
 #' @param rev Optional. For development purpose.
 #' @param hdu Optional. The name of the HDU containing the images. For primary HDU, set it to an empty string.
+#' 
+#' @export
 #' 
 gv_sci_checkcal <- function (file_cal, file_fits, file_dark=NULL, file_eps=NULL,
 		       rev=3, hdu='imaging_data_spe')
