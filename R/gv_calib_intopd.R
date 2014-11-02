@@ -94,7 +94,7 @@ gv_calib_intopd <- function (fits, v2pms, drk, cal, pol=1, debug=F, high.res=F,
 
 	ts_ft_binned   <- apply(ts_ft_sel, 2, mean)
 	temp <- apply(pd_ft_sel, c(1,3), sum, na.rm=T)
-	pd_ft_binned   <- list( mu=t(apply(Arg(temp), 1, unwrap)),
+	pd_ft_binned   <- list( mu=Arg(temp),
 												 var=sapply(1:N_sc, function (i)
 																		sapply(1:N_bl, function (j)
 																					 var(Arg(pd_ft_sel[j,,i]*Conj(temp[j,i])), na.rm=T)/bin_ft
@@ -116,8 +116,7 @@ gv_calib_intopd <- function (fits, v2pms, drk, cal, pol=1, debug=F, high.res=F,
 														list(mu=m, var=v)
 													})
 	pd_met_binned  <- gv_met_compdcv(cv_met_binned)
-	pd_met_binned  <- list( mu=t(apply(pd_met_binned$mu, 2, function (pdi)
-																		 unwrap(Arg(pdi)))),
+	pd_met_binned  <- list( mu=t(Arg(pd_met_binned$mu)),
 												 var=t(pd_met_binned$var))
 	td_met_binned  <- list( mu=t(Arg(sapply(cv_met_binned, function (cvi) cvi$mu))),
 												 var=t(sapply(cv_met_binned, function (cvi) cvi$var)))
