@@ -11,7 +11,7 @@ gv_weighted.mean <- function (x, v)
 	wt <- apply(1/v, 1, sum, na.rm=T)
 	wt_x <- apply(x/v, 1, sum, na.rm=T)/wt
 	wt_v <- apply((x-matrix(rep(wt_x,sz[2]), nrow=sz[1], ncol=sz[2]))^2/v, 1, sum, na.rm=T)/wt
-	return (list(m=wt_x, v=wt_v))
+	return (list(mu=wt_x, var=wt_v))
 }
 
 #' Compute the close loop OPD between the FT, SC and MET fringes
@@ -97,12 +97,14 @@ gv_calib_intopd <- function (fits, v2pms, drk, cal, pol=1, debug=F, high.res=F,
 	pd_ft_binned   <- list( mu=t(apply(Arg(temp), 1, unwrap)),
 												 var=sapply(1:N_sc, function (i)
 																		sapply(1:N_bl, function (j)
-																					 var(Arg(pd_ft_sel[j,,i]*Conj(temp[j,i])), na.rm=T)
+																					 var(Arg(pd_ft_sel[j,,i]*Conj(temp[j,i])), na.rm=T)/bin_ft
 																					 ))
 												 )
 	gd_ft_binned   <- list( mu=apply(gd_ft_sel, c(1,3), mean),
-												 var=apply(gd_ft_sel, c(1,3), var))
+												 var=apply(gd_ft_sel, c(1,3), var)/bin_ft)
 
+  # cannot scale variance by 1/bin_met since errors between adjacent points
+  # are correlated
 	ts_met_binned  <- apply(ts_met_sel, 2, mean)
 	cv_met_binned  <- apply(cv_met_sel, 3, function (cvi)
 													{
