@@ -35,7 +35,7 @@ gv_calib_intopd <- function (fits, v2pms, drk, cal, pol=1, debug=F, high.res=F,
 	# compute the complex visibilities of the SC fringes and all other relevant
 	# parameters
 	all_sc<- gv_sci_procmfits(fits, v2pms, drk, cal, pol=pol, hdu=hdu_sc)
-	pd_sc <- list( mu=t(apply(Arg(all_sc$pd$mu), 1, unwrap)), var=all_sc$pd$var)
+	pd_sc <- list(mu=Arg(all_sc$pd$mu), var=all_sc$pd$var)
 
 	# read the GD of the FT fringes
 	all_ft<- gv_ft_readmfits(fits)
@@ -103,8 +103,8 @@ gv_calib_intopd <- function (fits, v2pms, drk, cal, pol=1, debug=F, high.res=F,
 	gd_ft_binned   <- list( mu=apply(gd_ft_sel, c(1,3), mean),
 												 var=apply(gd_ft_sel, c(1,3), var)/bin_ft)
 
-  # cannot scale variance by 1/bin_met since errors between adjacent points
-  # are correlated
+	# cannot scale variance by 1/bin_met because the metrology phase is a MA(N)
+	# process, where N is the number voltages used to compute one phase
 	ts_met_binned  <- apply(ts_met_sel, 2, mean)
 	cv_met_binned  <- apply(cv_met_sel, 3, function (cvi)
 													{
