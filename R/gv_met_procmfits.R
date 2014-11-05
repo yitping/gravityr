@@ -38,16 +38,26 @@ gv_met_procmfits <- function (fits, sel=1:4, Nps=4, Ncpu=1,
 {
 	message(sprintf('processing %s [hdu=%s]...', fits, hdu))
 	volts <- gv_readfits(fits, hdu=hdu, col='volt')[,sel]
+	# find where is 'A'
+	phset <- gv_readfits(fits, hdu=hdu, col='volt_ps_set')[1:4]
+	ps    <- 1:4
+	phA   <- which(phset == 0)
+	if (length(phA) == 0) stop('fatal error: metrology phase A not found')
+	if (phA > 1)
+	{
+		for (i in 1:(phA-1)) { ps <- gv_circshift(ps) }
+	}
+
 	if (Ncpu > 1)
 	{
 		cv <- mclapply(1:length(sel), function (j)
-									 gv_met_volt2vis(volts[,j], N=Nps, abcd=1:4, ka=ka),
+									 gv_met_volt2vis(volts[,j], N=Nps, abcd=ps, ka=ka),
 									 mc.cores=Ncpu)
 	}
 	else
 	{
 		cv <- lapply(1:length(sel), function (j)
-								 gv_met_volt2vis(volts[,j], N=Nps, abcd=1:4, ka=ka))
+								 gv_met_volt2vis(volts[,j], N=Nps, abcd=ps, ka=ka))
 	}
 	return (t(simplify2array(cv, higher=T)))
 }
