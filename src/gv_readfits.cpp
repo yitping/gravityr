@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <fitsio.h>
+#include "gRavity.h"
 using namespace Rcpp;
 
 #define MAX_IMG_DIM 3
@@ -47,7 +48,7 @@ int gv_readfits_img(fitsfile *pfits, long n_elem, double *vec)
 
 //' FITS file reader
 //' 
-//' Reads a specific image HDU or extended binary table of a FITS files.
+//' Reads a specific image HDU or extended binary table of a FITS file.
 //' This reader function is tailor made for GRAVITY FITS format but can be used
 //' for generic FITS files. However, not all data types are supported.
 //' 

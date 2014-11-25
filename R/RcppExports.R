@@ -24,7 +24,7 @@ gv_const <- function() {
 
 #' FITS file reader
 #' 
-#' Reads a specific image HDU or extended binary table of a FITS files.
+#' Reads a specific image HDU or extended binary table of a FITS file.
 #' This reader function is tailor made for GRAVITY FITS format but can be used
 #' for generic FITS files. However, not all data types are supported.
 #' 
@@ -94,5 +94,29 @@ gv_solvels <- function(rA, rb, rw = numeric()) {
 #' 
 gv_vis2gd <- function(vis) {
     .Call('gRavity_gv_vis2gd', PACKAGE = 'gRavity', vis)
+}
+
+#' FITS image writer
+#' 
+#' Writes a vector, matrix or 3D array to a FITS file as an image.
+#' The data is written to the primary HDU.
+#' 
+gv_writefits_img <- function(img, fits_name, hdu_name = "") {
+    .Call('gRavity_gv_writefits_img', PACKAGE = 'gRavity', img, fits_name, hdu_name)
+}
+
+#' Transpose a Vector/Matrix
+NULL
+
+#' FITS table writer
+#' 
+#' Writes a named list to a FITS file as a binary table.
+#' The data is written to an extended HDU. Each member of the list is written
+#' as a separate column in the table.
+#'
+#' Supports only numeric and integer data type for now.
+#' 
+gv_writefits_tbl <- function(dat, fits_name, hdu_name = "gRavity", units = "") {
+    .Call('gRavity_gv_writefits_tbl', PACKAGE = 'gRavity', dat, fits_name, hdu_name, units)
 }
 

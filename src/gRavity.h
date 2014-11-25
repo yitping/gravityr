@@ -18,5 +18,6 @@ List gv_const();
 List gv_solvels(NumericMatrix rA, NumericVector rb, NumericVector rw);
 List gv_vis2gd(ComplexVector vis);
 void abcd2vis(double *ii, double *kx, double *sx, double *vv, double fx);
+void gv_print_fits_err(int err);
 
 #endif

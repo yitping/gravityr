@@ -123,3 +123,38 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// gv_writefits_img
+int gv_writefits_img(NumericVector img, CharacterVector fits_name, CharacterVector hdu_name = "");
+RcppExport SEXP gRavity_gv_writefits_img(SEXP imgSEXP, SEXP fits_nameSEXP, SEXP hdu_nameSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type img(imgSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type fits_name(fits_nameSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type hdu_name(hdu_nameSEXP );
+        int __result = gv_writefits_img(img, fits_name, hdu_name);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// gv_writefits_tbl
+int gv_writefits_tbl(List dat, CharacterVector fits_name, CharacterVector hdu_name = "gRavity", CharacterVector units = "");
+RcppExport SEXP gRavity_gv_writefits_tbl(SEXP datSEXP, SEXP fits_nameSEXP, SEXP hdu_nameSEXP, SEXP unitsSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< List >::type dat(datSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type fits_name(fits_nameSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type hdu_name(hdu_nameSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type units(unitsSEXP );
+        int __result = gv_writefits_tbl(dat, fits_name, hdu_name, units);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
