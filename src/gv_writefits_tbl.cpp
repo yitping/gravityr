@@ -3,16 +3,6 @@
 #include "gRavity.h"
 using namespace Rcpp;
 
-//' Transpose a Vector/Matrix
-template <typename T>
-T gv_transpose(T x, int nrow, int ncol)
-{
-	T y(nrow*ncol);
-	for (int i=0; i<nrow; i++) for (int j=0; j<ncol; j++)
-		y[i*ncol+j] = x[j*nrow+i];
-	return y;
-}
-
 //' FITS table writer
 //' 
 //' Writes a named list to a FITS file as a binary table.

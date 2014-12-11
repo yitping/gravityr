@@ -105,9 +105,6 @@ gv_writefits_img <- function(img, fits_name, hdu_name = "") {
     .Call('gRavity_gv_writefits_img', PACKAGE = 'gRavity', img, fits_name, hdu_name)
 }
 
-#' Transpose a Vector/Matrix
-NULL
-
 #' FITS table writer
 #' 
 #' Writes a named list to a FITS file as a binary table.

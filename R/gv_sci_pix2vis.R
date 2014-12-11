@@ -6,6 +6,7 @@
 #' some post-processing to the computed complex visibility.
 #' 
 #' The nominal baseline order of the SCI spectrometer is given as: ...
+#' T1-T2, T1-T3, T1-T4, T2-T3, T2-T4, T3-T4
 #' 
 #' @inheritParams gv_sci_pix2vis_unsorted
 #' @param blseq Optional. An vector that contains indices to rearrange the baseline order.

@@ -31,6 +31,8 @@ $ R CMD INSTALL --configure-args=' \
   --with-cfitsio-lib=/path/to/cfitsio/lib' \
   gRavity
 
+#--no-multiarch --with-keep.source --configure-args='--with-cfitsio-include=$HOME/Toolbox/c/include --with-cfitsio-lib=$HOME/Toolbox/c/lib'
+
 Second, by passing the necessary paths to the oifitslib through environment
 settings.
 

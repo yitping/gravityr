@@ -16,7 +16,7 @@ gv_readfits(fits_name, hdu_name = "", col_name = "")
 A numeric array.
 }
 \description{
-Reads a specific image HDU or extended binary table of a FITS files.
+Reads a specific image HDU or extended binary table of a FITS file.
 This reader function is tailor made for GRAVITY FITS format but can be used
 for generic FITS files. However, not all data types are supported.
 }
